@@ -2,21 +2,6 @@ const promptUser = () => {
   inquirer = require("inquirer");
   return inquirer.prompt([
     {
-      type: "input",
-      name: "name",
-      message: "What is your name?",
-    },
-    {
-      type: "input",
-      name: "github",
-      message: "Enter your GitHub Username",
-    },
-    {
-      type: "input",
-      name: "about",
-      message: "Provide some information about yourself:",
-    },
-    {
         type: 'input',
         name: 'name',
         message: 'What is your name? (Required)',
@@ -29,6 +14,29 @@ const promptUser = () => {
           }
         }
       },
+    {
+      type: "input",
+      name: "github",
+      message: "Enter your GitHub Username",
+    },
+    {
+        type: 'confirm',
+        name: 'confirmAbout',
+        message: 'Would you like to enter some information about yourself for an "About" section?',
+        default: true
+      },
+      {
+        type: 'input',
+        name: 'about',
+        message: 'Provide some information about yourself:',
+        when: ({ confirmAbout }) => {
+          if (confirmAbout) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      }
   
   ]);
 };
